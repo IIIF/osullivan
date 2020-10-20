@@ -1,9 +1,11 @@
 require 'iiif/presentation'
 require 'simplecov'
 require 'coveralls'
-Dir["#{File.dirname(__FILE__)}/unit/iiif/presentation/shared_examples/*.rb"].each do |f|
+
+Dir["#{File.absolute_path(__dir__)}/support/**/*.rb"].each do |f| 
   require f
 end
+
 require 'vcr'
 
 VCR.configure do |c|

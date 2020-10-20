@@ -1,4 +1,6 @@
 describe IIIF::Service do
+  
+  let(:fixed_values) { {} }
 
   describe 'self#get_descendant_class_by_jld_type' do
     before do
@@ -24,5 +26,7 @@ describe IIIF::Service do
       end
     end
   end
+
+  it_behaves_like 'it has symmetric as_json and to_json methods'
 
 end

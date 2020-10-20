@@ -11,9 +11,9 @@ describe IIIF::Presentation::Manifest do
 
   let(:fixed_values) do
     {
-      'type' => 'a:SubClass',
-      'id' => 'http://example.com/prefix/manifest/123',
-      'context' => IIIF::Presentation::CONTEXT,
+      '@type' => 'a:SubClass',
+      '@id' => 'http://example.com/prefix/manifest/123',
+      '@context' => IIIF::Presentation::CONTEXT,
       'label' => 'Book 1',
       'description' => 'A longer description of this example book. It should give some real information.',
       'thumbnail' => {
@@ -86,4 +86,5 @@ describe IIIF::Presentation::Manifest do
     it_behaves_like 'it has the appropriate methods for any-type keys'
   end
 
+  it_behaves_like 'it has symmetric as_json and to_json methods'
 end

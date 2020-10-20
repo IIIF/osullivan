@@ -105,6 +105,7 @@ describe IIIF::Presentation::Sequence do
     end
   end
 
-
+  it_behaves_like 'it has symmetric as_json and to_json methods'
+  
 end
 

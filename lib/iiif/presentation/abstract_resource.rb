@@ -56,7 +56,6 @@ module IIIF
         super(hsh)
       end
 
-
       # Options:
       #  * force: (true|false). Skips validations.
       #  * include_context: (true|false). Adds the @context to the top of the
@@ -70,9 +69,11 @@ module IIIF
         end
         super(opts)
       end
+
+      # alias_method has to be included after to_ordered_hash is defined
+      alias_method :as_json, :to_ordered_hash
       
     end
-
   end
 end
 

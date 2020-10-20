@@ -34,5 +34,7 @@ describe IIIF::Presentation::Layer do
     it_behaves_like 'it has the appropriate methods for any-type keys'
   end
 
+  it_behaves_like 'it has symmetric as_json and to_json methods'
+
 end
 

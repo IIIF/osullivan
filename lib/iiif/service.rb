@@ -196,6 +196,9 @@ module IIIF
       export_hash
     end
 
+    # alias_method has to be included after to_ordered_hash is defined
+    alias_method :as_json, :to_ordered_hash
+
     def self.from_ordered_hash(hsh, default_klass=IIIF::OrderedHash)
       # Create a new object (new_object)
       type = nil
