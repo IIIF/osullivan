@@ -25,6 +25,11 @@ seed = {
 # Any options you add are added to the object
 manifest = IIIF::Presentation::Manifest.new(seed)
 
+# sequences array is generated for you, but let's add a sequence object
+sequence = IIIF::Presentation::Sequence.new()
+sequence['@id'] = "http://example.com/manifest/seq/"
+manifest.sequences << sequence
+
 canvas = IIIF::Presentation::Canvas.new()
 # All classes act like `ActiveSupport::OrderedHash`es, for the most part.
 # Use `[]=` to set JSON-LD properties...
@@ -35,10 +40,25 @@ canvas.width = 10
 canvas.height = 20
 canvas.label = 'My Canvas'
 
+# Add images 
+service = IIIF::Presentation::Resource.new('@context' => 'http://iiif.io/api/image/2/context.json', 'profile' => 'http://iiif.io/api/image/2/level2.json', '@id' => "http://images.exampl.com/loris2/my-image")
+
+image = IIIF::Presentation::ImageResource.new()
+i['@id'] = "http://images.exampl.com/loris2/my-image/full/#{canvas.width},#{canvas.height}/0/default.jpg"
+i.format = "image/jpeg"
+i.width = canvas.width
+i.height = canvas.height
+i.service = service
+
+images = IIIF::Presentation::Resource.new('@type' => 'oa:Annotation', 'motivation' => 'sc:painting', '@id' => "#{canvas['@id']}/images", 'resource' => i)
+
+canvas.images << images
+
+# Add other content resources
 oc = IIIF::Presentation::Resource.new('@id' => 'http://example.com/content')
 canvas.other_content << oc
 
-manifest.sequences << canvas
+manifest.sequences.first.canvases << canvas
 
 puts manifest.to_json(pretty: true)
 ```
